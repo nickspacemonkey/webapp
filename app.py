@@ -34,9 +34,9 @@ def article(id):
     return render_template('article.html', id = id)
 
 class RegiserForm(Form):
-        name = StringField('Name', validators=[validators.input_required(), validators.Length(min=1, max=50)])
-        username = StringField('Username', validators=[validators.input_required(), validators.Length(min=4, max=25)])
-        email = StringField('Email', validators=[validators.input_required(), validators.Length(min=6, max=50)])
+        name = StringField('Name', render_kw={"placeholder": "Name"}, validators=[validators.input_required(), validators.Length(min=1, max=50)])
+        username = StringField('Username', render_kw={"placeholder": "Username"}, validators=[validators.input_required(), validators.Length(min=4, max=25)])
+        email = StringField('Email', render_kw={"placeholder": "Email"}, validators=[validators.input_required(), validators.Length(min=6, max=50)])
         password = PasswordField('Password', [
             validators.DataRequired(),
             validators.EqualTo('confirm', message='Passwords do not match')
