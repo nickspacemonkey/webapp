@@ -2,28 +2,26 @@
 
 {% block body %}
 
-{% from "includes/_formhelpers.html" import render_field%}
+<form id="myform" class="form-group text-center" role="form" method="POST" action="">
 
-<form class="form-group text-center" method="POST" action="">
+  <img class="mb-4" src="https://getbootstrap.com/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
 
   <h1 class="h3 mb-3 font-weight-normal">Registration page</h1>
 
-  <div class="form-group">
-    {{render_field(form.name, class_="form-control")}}
-  </div>
-  <div class="form-group">
-    {{render_field(form.email, class_="form-control")}}
-  </div>
-  <div class="form-group">
-    {{render_field(form.username, class_="form-control")}}
-  </div>
-  <div class="form-group">
-    {{render_field(form.password, class_="form-control")}}
-  </div>
-  <div class="form-group">
-    {{render_field(form.confirm, class_="form-control")}}
-  </div>
+  <label for="inputName" class="sr-only">Name</label>
+  <input type="name" name="name" id="inputName" class="form-control" placeholder="Name" required autofocus>
 
+  <label for="inputEmail" class="sr-only">Email</label>
+  <input type="email" name="email" id="inputEmail" class="form-control" placeholder="Email" required>
+
+  <label for="inputUsername" class="sr-only">Username</label>
+  <input type="username" name="username" id="inputUsername" class="form-control" placeholder="Username" required>
+
+  <label for="inputPassword" class="sr-only">Password</label>
+  <input type="password" name="password" id="inputPassword" class="form-control" placeholder="Password" required>
+
+  <label for="inputConfirm" class="sr-only">Confirm</label>
+  <input type="password" name="confirm" class="form-control" id="inputPasswordConfirm" placeholder="Confirm" required>
   <p>
     <input type="submit" class="btn btn-lg btn-primary btn-block" value="submit" />
   </p>
@@ -32,5 +30,23 @@
 
 
 </form>
+
+
+<script>
+var password = document.getElementById("inputPassword")
+  , confirm_password = document.getElementById("inputPasswordConfirm");
+
+function validatePassword(){
+  if(password.value != confirm_password.value) {
+    confirm_password.setCustomValidity("Passwords don't Match");
+  } else {
+    confirm_password.setCustomValidity('');
+  }
+}
+
+password.onchange = validatePassword;
+confirm_password.onkeyup = validatePassword;
+</script>
+
 
 {% endblock %}
