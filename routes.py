@@ -1,4 +1,4 @@
-from app import app, Articles
+from app import app, Articles, is_logged_in
 from flask import render_template, flash, redirect, url_for, session, logging, request
 
 @app.route('/')
@@ -24,5 +24,6 @@ def logout():
     return redirect(url_for('login'))
 
 @app.route('/dashboard')
+@is_logged_in
 def dashboard():
     return render_template('dashboard.html')

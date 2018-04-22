@@ -1,6 +1,7 @@
 from flask import Flask
 from flask_mysqldb import MySQL
 from data import Articles
+from functools import wraps
 
 app = Flask(__name__)
 app.debug = True
@@ -18,6 +19,15 @@ Articles = Articles()
 from routes import *
 from forms import *
 
+def is_logged_in(f):
+    @wraps(f)
+    def wrap(*args, **kwargs):
+        if 'logged_in' in session:
+            return f(*args, **kwargs)
+        else:
+            flash('Unauthorised, please login.', 'danger')
+            return redirect(url_for('login'))
+    return wrap
 
 if __name__ =='__main__':
     app.secret_key='secret123'
