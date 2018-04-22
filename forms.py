@@ -1,6 +1,6 @@
 from app import app
 from flask import render_template, flash, redirect, url_for, session, request
-from wtforms import Form, StringField, TextAreaField, PasswordField, validators
+from wtforms import Form, StringField, TextAreaField, PasswordField
 from passlib.hash import sha256_crypt
 from app import mysql
 
@@ -15,7 +15,7 @@ class RegiserForm(Form):
 def register():
     form = RegiserForm(request.form)
 
-    if request.method == 'POST' and form.validate():
+    if request.method == 'POST':
         name = form.name.data
         email = form.email.data
         username = form.username.data
