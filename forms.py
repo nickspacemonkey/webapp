@@ -1,8 +1,7 @@
-from app import app
+from app import app, mysql
 from flask import render_template, flash, redirect, url_for, session, request
 from wtforms import Form, StringField, TextAreaField, PasswordField
 from passlib.hash import sha256_crypt
-from app import mysql
 
 class RegiserForm(Form):
         name = StringField()

@@ -1,5 +1,6 @@
 from flask import Flask
 from flask_mysqldb import MySQL
+from data import Articles
 
 app = Flask(__name__)
 app.debug = True
@@ -11,6 +12,7 @@ app.config['MYSQL_DB'] = 'myflaskapp'
 app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 
 mysql = MySQL(app)
+Articles = Articles()
 
 #Loads the different routes
 from routes import *

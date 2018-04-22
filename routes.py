@@ -1,6 +1,5 @@
-from app import app
+from app import app, Articles
 from flask import render_template, flash, redirect, url_for, session, logging, request
-from data import Articles
 
 @app.route('/')
 def index():
@@ -9,9 +8,6 @@ def index():
 @app.route('/about')
 def about():
     return render_template('about.html')
-
-#Gets the articles from data.py
-Articles = Articles()
 
 @app.route('/articles')
 def articles():
