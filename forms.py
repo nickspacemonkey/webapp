@@ -28,7 +28,7 @@ def register():
 
         cur.close()
 
-        flash('You are now registered please login', 'sucess')
+        flash('You are now registered please login', 'success')
 
         return redirect(url_for('login'))
 
@@ -64,14 +64,13 @@ def login():
 
     return render_template('login.html')
 
-class RegiserForm(Form):
+class ArticleForm(Form):
         title = StringField()
         body = TextAreaField()
 
 @app.route('/add_article', methods=['GET', 'POST'])
 @is_logged_in
 def add_article():
-    return render_template('add_article.html')
     form = ArticleForm(request.form)
     if request.method == 'POST':
         title = form.title.data
@@ -85,8 +84,8 @@ def add_article():
 
         cur.close()
 
-        flash('Article created', 'sucess')
+        flash('Article created', 'success')
 
         return redirect(url_for('dashboard'))
 
-    return render_template('add_article', form=form)
+    return render_template('add_article.html', form=form)

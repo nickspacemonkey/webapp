@@ -79,3 +79,7 @@
 .form-article textarea[type="body"] {
   margin-bottom: 5px;
 }
+
+.ck-editor__editable {
+    min-height: 400px;
+}

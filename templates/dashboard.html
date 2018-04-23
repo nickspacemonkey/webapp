@@ -2,7 +2,39 @@
 
 {% block body %}
 
-<h1>Dashboard <small> Welcome {{session.username}} </small></h1>
-<a class="btn btn-lg btn-primary btn-block" href="/add_article"></a>
+<div class="cover-container d-flex h-100 p-3 mx-auto flex-column">
+
+  <main role="main" class="inner cover">
+    <h1 class="cover-heading">Dashboard <small> Welcome {{session.username}} </small></h1>
+    <p class="lead">Here you can add new articles to your feed.</p>
+    <p class="lead">
+      <a class="btn btn-lg btn-primary" href="/add_article"> Add new article</a>
+    </p>
+  </main>
+  <table class="table table-striped">
+    <tr>
+      <th>ID</th>
+      <th>Title</th>
+      <th>Author</th>
+      <th>Date</th>
+      <th></th>
+      <th></th>
+    </tr>
+
+    {% for article in articles %}
+    <tr>
+      <td>{{article.id}}</td>
+      <td>{{article.title}}</td>
+      <td>{{article.author}}</td>
+      <td>{{article.create_date}}</td>
+      <td><a href="edit_article/((article.id))" class="btn btn-default pull-right">Edit</a></td>
+      <td><a href="#" class="btn btn-danger">Delete</a></td>
+    </tr>
+    {% endfor %}
+
+  </table>
+
+
+</div>
 
 {% endblock %}
