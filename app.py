@@ -15,10 +15,6 @@ app.config['MYSQL_CURSORCLASS'] = 'DictCursor'
 mysql = MySQL(app)
 Articles = Articles()
 
-#Loads the different routes
-from routes import *
-from forms import *
-
 def is_logged_in(f):
     @wraps(f)
     def wrap(*args, **kwargs):
@@ -28,6 +24,10 @@ def is_logged_in(f):
             flash('Unauthorised, please login.', 'danger')
             return redirect(url_for('login'))
     return wrap
+
+#Loads the different routes
+from routes import *
+from forms import *
 
 if __name__ =='__main__':
     app.secret_key='secret123'

@@ -1,5 +1,5 @@
-from app import app, Articles, is_logged_in
-from flask import render_template, flash, redirect, url_for, session, logging, request
+from app import *
+from flask import render_template, flash, redirect, url_for, session, request
 
 @app.route('/')
 def index():
@@ -18,6 +18,7 @@ def article(id):
     return render_template('article.html', id = id)
 
 @app.route('/logout')
+@is_logged_in
 def logout():
     session.clear()
     flash('You are now logged out', 'success')

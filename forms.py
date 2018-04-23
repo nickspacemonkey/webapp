@@ -1,4 +1,4 @@
-from app import app, mysql
+from app import *
 from flask import render_template, flash, redirect, url_for, session, request
 from wtforms import Form, StringField, TextAreaField, PasswordField
 from passlib.hash import sha256_crypt
@@ -63,3 +63,30 @@ def login():
             return render_template('login.html', error=error)
 
     return render_template('login.html')
+
+class RegiserForm(Form):
+        title = StringField()
+        body = TextAreaField()
+
+@app.route('/add_article', methods=['GET', 'POST'])
+@is_logged_in
+def add_article():
+    return render_template('add_article.html')
+    form = ArticleForm(request.form)
+    if request.method == 'POST':
+        title = form.title.data
+        body = form.body.data
+
+        cur = mysql.connection.cursor()
+
+        cur.execute("INSERT INTO articles(title, body, author) VALUES(%s, %s, %s)", (title, body, session['username']))
+
+        mysql.connection.commit()
+
+        cur.close()
+
+        flash('Article created', 'sucess')
+
+        return redirect(url_for('dashboard'))
+
+    return render_template('add_article', form=form)
